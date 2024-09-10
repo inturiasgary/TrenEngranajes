@@ -67,7 +67,7 @@ for i in range(len(llistEngranaje)):
     nrow += 1
 
 # Entrys Engranaje
-eDientes = Entry(frameDerEng, text="Cantidad de dientes:", bd=4)
+eDientes = Entry(frameDerEng, text="Cantidad de dientes:", bd=4, validate="key")
 vcmd3 = (eDientes.register(on_validarInt), '%P')
 eDientes.config(validatecommand=vcmd3)
 eModulo = Entry(frameDerEng, text="Módulo:", bd=4, validate="key")
