@@ -6,6 +6,6 @@ Para correr el programa, debes seguir las siguientes instrucciones en la termina
 git clone
 cd TrenEngranajes
 source env/bin/activate
-pip3 install -r requirements.txt
+pip3 install -r requirimientos.txt
 python3 principal.py
 ```
