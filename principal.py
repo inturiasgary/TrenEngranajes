@@ -1,10 +1,11 @@
-from tkinter import ttk, PhotoImage, Label, Frame, Entry
+from tkinter import ttk, PhotoImage, Label, Frame, Entry, Button, StringVar
 import tkinter as tk
 import re
+from Engranaje import Engranaje
 
 
 def validarFloat(string):
-    regex = re.compile(r"(\+|\-)?[0-9,]*$")
+    regex = re.compile(r"(\+|\-)?[0-9.]*$")
     result = regex.match(string)
     return (string == ""
             or (string.count('+') <= 1
@@ -41,7 +42,8 @@ tab = ttk.Notebook(mainWindow, height=400, width=350)
 frameEngranaje = Frame(tab)
 frameIzqEng = Frame(frameEngranaje)
 frameDerEng = Frame(frameEngranaje)
-frameAbaEng = Frame(frameEngranaje)
+frameAbaEng1 = Frame(frameEngranaje)
+frameAbaEng2 = Frame(frameEngranaje)
 frameMaquina = Frame(tab)
 
 tab.add(frameEngranaje, text="Engranaje")
@@ -52,7 +54,8 @@ tab.pack()
 
 frameIzqEng.pack(side="left")
 frameDerEng.pack(side="right")
-frameAbaEng.pack(side="bottom")
+frameAbaEng1.pack(side="bottom")
+frameAbaEng2.pack(side="bottom")
 
 # Labels Engranaje
 
@@ -67,7 +70,8 @@ for i in range(len(llistEngranaje)):
     nrow += 1
 
 # Entrys Engranaje
-eDientes = Entry(frameDerEng, text="Cantidad de dientes:", bd=4, validate="key")
+eDientes = Entry(frameDerEng, text="Cantidad de dientes:",
+                 bd=4, validate="key")
 vcmd3 = (eDientes.register(on_validarInt), '%P')
 eDientes.config(validatecommand=vcmd3)
 eModulo = Entry(frameDerEng, text="Módulo:", bd=4, validate="key")
@@ -76,14 +80,31 @@ eModulo.config(validatecommand=vcmd2)
 eAngulo = Entry(frameDerEng, text="Ángulo:", bd=4, validate="key")
 vcmd = (eAngulo.register(on_validarFloat), '%P')
 eAngulo.config(validatecommand=vcmd)
-eDiametroExt = Entry(frameDerEng, text="Diámetro Exterior:",
-                     bd=4, state="disabled")
+entradaDiametroExterior = StringVar()
+eDiametroExt = Entry(frameDerEng, textvariable=entradaDiametroExterior,
+                     bd=4, state="readonly")
+entradaDiametroPrimitivo = StringVar()
 eDiametroPri = Entry(
-    frameDerEng, text="Diámetro Primitivo:", bd=4, state="disabled")
-eDiametroInt = Entry(frameDerEng, text="Diámetro Interior:",
-                     bd=4, state="disabled")
-ePasoDeHelice = Entry(frameDerEng, text="Paso de hélice:",
-                      bd=4, state="disabled")
+    frameDerEng, textvariable=entradaDiametroPrimitivo, bd=4, state="readonly")
+entradaDiametroInterior = StringVar()
+eDiametroInt = Entry(frameDerEng, textvariable=entradaDiametroInterior,
+                     bd=4, state="readonly")
+entradaPasoHelice = StringVar()
+ePasoDeHelice = Entry(frameDerEng, textvariable=entradaPasoHelice,
+                      bd=4, state="readonly")
+
+
+def Calcular():
+    engranaje = Engranaje(z=float(eDientes.get()), modulo=float(
+        eModulo.get()), anguloHelice=float(eAngulo.get()))
+    entradaDiametroExterior.set(str(engranaje.diametroExterior()))
+    entradaDiametroPrimitivo.set(str(engranaje.diametroPrimitivo()))
+    entradaDiametroInterior.set(str(engranaje.diametroInterior()))
+    # entradaPasoHelice.set(str(engranaje.pasoHelice()))
+
+
+botonCalcular = Button(frameAbaEng1, text="Calcular",
+                       command=Calcular)
 eDientes.pack()
 eModulo.pack()
 eAngulo.pack()
@@ -91,10 +112,12 @@ eDiametroExt.pack()
 eDiametroPri.pack()
 eDiametroInt.pack()
 ePasoDeHelice.pack()
+botonCalcular.pack()
 
 lwm = Label(frameMaquina, text="Primer Label maquina", bd=4)
 lwm.pack(side="left")
 lw2m = Label(frameMaquina, text="Primer Label maquina", bd=4)
 lw2m.pack(side="right")
+
 
 mainWindow.mainloop()
