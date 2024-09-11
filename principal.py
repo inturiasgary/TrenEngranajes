@@ -97,9 +97,9 @@ ePasoDeHelice = Entry(frameDerEng, textvariable=entradaPasoHelice,
 def Calcular():
     engranaje = Engranaje(z=float(eDientes.get()), modulo=float(
         eModulo.get()), anguloHelice=float(eAngulo.get()))
-    entradaDiametroExterior.set(str(engranaje.diametroExterior()))
-    entradaDiametroPrimitivo.set(str(engranaje.diametroPrimitivo()))
-    entradaDiametroInterior.set(str(engranaje.diametroInterior()))
+    entradaDiametroExterior.set(str(round(engranaje.diametroExterior(), 3)))
+    entradaDiametroPrimitivo.set(str(round(engranaje.diametroPrimitivo(), 3)))
+    entradaDiametroInterior.set(str(round(engranaje.diametroInterior(), 3)))
     # entradaPasoHelice.set(str(engranaje.pasoHelice()))
 
 
