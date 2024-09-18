@@ -16,3 +16,6 @@ class Engranaje:
 
     def diametroInterior(self):
         return (self.diametroExterior()-(2*2.25*self.modulo))
+
+    def pasoHelice(self):
+        return (self.diametroPrimitivo()*math.pi/math.tan(radians(self.anguloHelice)))

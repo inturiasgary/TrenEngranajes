@@ -35,16 +35,16 @@ mainWindow = tk.Tk()
 mainWindow.title("Aplicación cálculo Tren Engranajes")
 icon = PhotoImage(file="icon.png")
 mainWindow.iconphoto(True, icon)
-mainWindow.geometry("400x600")
+mainWindow.geometry("500x600")
 mainWindow.resizable(False, False)
 
-tab = ttk.Notebook(mainWindow, height=400, width=350)
+tab = ttk.Notebook(mainWindow, height=600, width=350)
 frameEngranaje = Frame(tab)
-frameIzqEng = Frame(frameEngranaje)
-frameDerEng = Frame(frameEngranaje)
-frameAbaEng1 = Frame(frameEngranaje)
-frameAbaEng2 = Frame(frameEngranaje)
+frameIzqEng = Frame(frameEngranaje, borderwidth=10)
+frameDerEng = Frame(frameEngranaje, borderwidth=10)
+frameAbaEng = Frame(frameEngranaje, borderwidth=10)
 frameMaquina = Frame(tab)
+
 
 tab.add(frameEngranaje, text="Engranaje")
 tab.add(frameMaquina, text="Máquina")
@@ -54,18 +54,17 @@ tab.pack()
 
 frameIzqEng.pack(side="left")
 frameDerEng.pack(side="right")
-frameAbaEng1.pack(side="bottom")
-frameAbaEng2.pack(side="bottom")
+frameAbaEng.pack()
 
 # Labels Engranaje
 
 llistEngranaje = ["Cantidad de dientes:", "Módulo:",
                   "Ángulo:", "Diámetro Exterior:", "Diámetro Primitivo:", "Diámetro Interior:",
-                  "Paso de hélice:"]
+                  "Paso de hélice:", " "]
 
 nrow = 0
 for i in range(len(llistEngranaje)):
-    Label(frameIzqEng, text=llistEngranaje[i], bd=4).grid(
+    Label(frameIzqEng, text=llistEngranaje[i], bd=5).grid(
         row=nrow, column=0, sticky=tk.E)
     nrow += 1
 
@@ -100,11 +99,12 @@ def Calcular():
     entradaDiametroExterior.set(str(round(engranaje.diametroExterior(), 3)))
     entradaDiametroPrimitivo.set(str(round(engranaje.diametroPrimitivo(), 3)))
     entradaDiametroInterior.set(str(round(engranaje.diametroInterior(), 3)))
-    # entradaPasoHelice.set(str(engranaje.pasoHelice()))
+    entradaPasoHelice.set(str(round(engranaje.pasoHelice(), 3)))
 
 
-botonCalcular = Button(frameAbaEng1, text="Calcular",
+botonCalcular = Button(frameDerEng, text="Calcular", bd=4,
                        command=Calcular)
+
 eDientes.pack()
 eModulo.pack()
 eAngulo.pack()
@@ -116,6 +116,8 @@ botonCalcular.pack()
 
 lwm = Label(frameMaquina, text="Primer Label maquina", bd=4)
 lwm.pack(side="left")
+lwm1 = Label(frameMaquina, text="Primer Label maquina", bd=4)
+lwm1.pack(side="left")
 lw2m = Label(frameMaquina, text="Primer Label maquina", bd=4)
 lw2m.pack(side="right")
 
