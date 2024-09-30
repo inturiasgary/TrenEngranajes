@@ -35,14 +35,14 @@ mainWindow = tk.Tk()
 mainWindow.title("Aplicación cálculo Tren Engranajes")
 icon = PhotoImage(file="icon.png")
 mainWindow.iconphoto(True, icon)
-mainWindow.geometry("500x600")
+mainWindow.geometry("400x600")
 mainWindow.resizable(False, False)
 
 tab = ttk.Notebook(mainWindow, height=600, width=350)
 frameEngranaje = Frame(tab)
-frameIzqEng = Frame(frameEngranaje, borderwidth=10)
+frameIzqEng = Frame(frameEngranaje, borderwidth=5)
 frameDerEng = Frame(frameEngranaje, borderwidth=10)
-frameAbaEng = Frame(frameEngranaje, borderwidth=10)
+frameAbaEng = Frame(frameEngranaje, borderwidth=5)
 frameMaquina = Frame(tab)
 
 
@@ -52,8 +52,8 @@ tab.add(frameMaquina, text="Máquina")
 tab.pack()
 
 
-frameIzqEng.pack(side="left")
-frameDerEng.pack(side="right")
+frameIzqEng.pack(side=tk.LEFT)
+frameDerEng.pack(side=tk.RIGHT)
 frameAbaEng.pack()
 
 # Labels Engranaje
@@ -115,11 +115,20 @@ ePasoDeHelice.pack()
 botonCalcular.pack()
 
 lwm = Label(frameMaquina, text="Primer Label maquina", bd=4)
-lwm.pack(side="left")
-lwm1 = Label(frameMaquina, text="Primer Label maquina", bd=4)
-lwm1.pack(side="left")
-lw2m = Label(frameMaquina, text="Primer Label maquina", bd=4)
-lw2m.pack(side="right")
+lwm.pack()
 
+
+table = ttk.Treeview(frameMaquina, columns=(
+    'A', 'B', 'C', 'D'), show='headings')
+table.heading('A', text='A')
+table.heading('B', text='B')
+table.heading('C', text='C')
+table.heading('D', text='D')
+table.column("A", width=50, anchor='e')
+table.column("B", width=50, anchor='e')
+table.column("C", width=50, anchor='e')
+table.column("D", width=50, anchor='e')
+
+table.pack(fill='both', expand=True)
 
 mainWindow.mainloop()
