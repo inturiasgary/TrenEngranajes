@@ -35,7 +35,7 @@ mainWindow = tk.Tk()
 mainWindow.title("Aplicación cálculo Tren Engranajes")
 icon = PhotoImage(file="icon.png")
 mainWindow.iconphoto(True, icon)
-mainWindow.geometry("400x600")
+mainWindow.geometry("400x650")
 mainWindow.resizable(False, False)
 
 tab = ttk.Notebook(mainWindow, height=600, width=350)
