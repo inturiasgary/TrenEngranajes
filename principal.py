@@ -114,9 +114,15 @@ eDiametroInt.pack()
 ePasoDeHelice.pack()
 botonCalcular.pack()
 
-lwm = Label(frameMaquina, text="Primer Label maquina", bd=4)
-lwm.pack()
+entradaCtteC = StringVar()
+entradaP = StringVar()
 
+labelCtteCinetica = Label(
+    frameMaquina, text="Constante Cinética:", bd=5).pack()
+entradaCtteCinetica = Entry(
+    frameMaquina, textvariable=entradaCtteC, bd=4).pack()
+labelPaso = Label(frameMaquina, text="Paso:", bd=5).pack()
+entradaPaso = Entry(frameMaquina, textvariable=entradaP, bd=4).pack()
 
 table = ttk.Treeview(frameMaquina, columns=(
     'A', 'B', 'C', 'D'), show='headings')
